@@ -1,0 +1,12 @@
+<?php
+
+namespace $NAMESPACE$;
+
+
+enum $CLASS_NAME$: string
+{
+    case EXAMPLE1 = 'example1';
+    case EXAMPLE2 = 'example2';
+    case EXAMPLE3 = 'example3';
+}
+
