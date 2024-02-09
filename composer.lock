@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "089189483198b9d88a4cf56e10f0413f",
+    "content-hash": "e0ae6256802359c3b666ead39f019ed6",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -5175,6 +5175,53 @@
                 }
             ],
             "time": "2023-02-14T16:54:54+00:00"
+        },
+        {
+            "name": "shanerbaner82/panel-roles",
+            "version": "v0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shanerbaner82/panel-roles.git",
+                "reference": "86878c598a79eaaf178fbdbaed77cd387434faeb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shanerbaner82/panel-roles/zipball/86878c598a79eaaf178fbdbaed77cd387434faeb",
+                "reference": "86878c598a79eaaf178fbdbaed77cd387434faeb",
+                "shasum": ""
+            },
+            "require": {
+                "filament/support": "^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Shanerbaner82\\PanelRoles\\PanelRolesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Shanerbaner82\\PanelRoles\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SD Rosenthal",
+                    "email": "srosenthal82@gmail.com"
+                }
+            ],
+            "description": "Filament Panel Roles is an intuitive way to ensure all users of a specified panel within Filament v3 is assigned a role during registration and has a specified role using Laravel Middleware.",
+            "support": {
+                "issues": "https://github.com/shanerbaner82/panel-roles/issues",
+                "source": "https://github.com/shanerbaner82/panel-roles/tree/v0.0.3"
+            },
+            "time": "2023-10-10T00:33:42+00:00"
         },
         {
             "name": "spatie/color",

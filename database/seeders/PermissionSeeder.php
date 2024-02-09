@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Role as RoleEnum;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 class PermissionSeeder extends Seeder
@@ -47,13 +49,13 @@ class PermissionSeeder extends Seeder
         $superAdmin = User::factory()->create([
             'name' => 'علی زیبایی',
             'email' => 'alizibaie1380@gmail.com',
-            'password' => Hash::make(123456),
+            'password' => 123456,
         ]);
 
         $sampleSeller = User::factory()->create([
-            'name'=>'فورشنده اول' ,
+            'name'=>'first seller' ,
             'email'=>'alizibaie2001@gmail.com' ,
-            'password'=>Hash::make('Ali1380$50505'),
+            'password'=>'Ali1380$50505',
         ]);
         $superAdmin->assignRole($admin);
         $sampleSeller->assignRole($seller);
