@@ -3,7 +3,6 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\RestaurantCategoryResource\Pages;
-use App\Filament\Admin\Resources\RestaurantCategoryResource\RelationManagers;
 use App\Models\RestaurantCategory;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -14,6 +13,11 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Maatwebsite\Excel\Excel;
+use PhpOffice\PhpSpreadsheet\Writer\Pdf;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class RestaurantCategoryResource extends Resource
 {
@@ -48,10 +52,17 @@ class RestaurantCategoryResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->exports([
+                            ExcelExport::make('csv')->fromTable()->withWriterType(Excel::CSV),
+                            ExcelExport::make('excel')->fromTable(),
+
+                        ])
                 ]),
             ]);
     }

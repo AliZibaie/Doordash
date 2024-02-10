@@ -19,7 +19,7 @@ with the features below
 ### Seller
 <ol>
 <li>foods (create+index+delete+edit+set(as active))</li>
-<li>restaurant (create+show+delete+edit)</li>
+<li>restaurant (create+show+delete+edit+export(excel))</li>
 <li>see restaurant income and get a report as excel & pdf </li>
 <li>comments (reply+index+delete request to admin+edit(his own))</li>
 <li>exclusive chatroom for sellers</li>
