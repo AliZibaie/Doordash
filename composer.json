@@ -9,7 +9,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "blade-ui-kit/blade-heroicons": "^2.3",
         "filament/filament": "3.2",
+        "filament/forms": "3.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/breeze": "^1.28",
         "laravel/framework": "^10.10",
@@ -17,6 +19,7 @@
         "laravel/scout": "^10.8",
         "laravel/telescope": "^4.17",
         "laravel/tinker": "^2.8",
+        "phpsa/filament-password-reveal": "^2.1",
         "shanerbaner82/panel-roles": "^0.0.3",
         "spatie/laravel-permission": "^6.3"
     },
