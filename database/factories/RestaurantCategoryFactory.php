@@ -17,7 +17,8 @@ class RestaurantCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'type'=>'category'.$this->faker->numberBetween(1,1000000)
+            'type'=>'restaurant category'.$this->faker->numberBetween(1,1000000),
+            'registered_at'=>$this->faker->dateTime
         ];
     }
 }

@@ -10,5 +10,6 @@ class RestaurantCategory extends Model
     use HasFactory;
     protected $fillable  = [
         'type',
+        'registered_at',
     ];
 }

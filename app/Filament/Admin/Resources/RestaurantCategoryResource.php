@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -32,9 +33,18 @@ class RestaurantCategoryResource extends Resource
     {
         return $table
             ->columns([
-               TextColumn::make('type')->label('Categories')
+               TextColumn::make('type')
+                   ->label('Categories')
+                   ->searchable()
+                   ->sortable(),
+                TextColumn::make('registered_at')
+                ->label('Date')
+                    ->dateTime('Y M j h:i')
+                    ->searchable()
+                    ->sortable()
             ])
             ->filters([
+//                Filter::make('2023')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
