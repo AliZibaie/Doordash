@@ -19,7 +19,7 @@ class RestaurantCategoryResource extends Resource
 {
     protected static ?string $model = RestaurantCategory::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
 
     public static function form(Form $form): Form
     {
@@ -44,10 +44,10 @@ class RestaurantCategoryResource extends Resource
                     ->sortable()
             ])
             ->filters([
-//                Filter::make('2023')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
