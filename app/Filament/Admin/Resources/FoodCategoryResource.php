@@ -48,7 +48,7 @@ class FoodCategoryResource extends Resource
                     ->toggleable()
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
