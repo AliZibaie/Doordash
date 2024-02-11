@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\UserCreated;
+use App\Jobs\NotifyAdminJob;
 use App\Mail\CongratulateAdmin;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -23,6 +24,6 @@ class NotifyAdmin
      */
     public function handle(UserCreated $event): void
     {
-        Mail::to('alizibaie1380@gmail.com')->send(new CongratulateAdmin($event->getUser()->email));
+        NotifyAdminJob::dispatch($event->getUser());
     }
 }

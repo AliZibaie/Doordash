@@ -3,6 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\UserCreated;
+use App\Jobs\NotifyAdminJob;
+use App\Jobs\SendWelcomeEmailJob;
 use App\Mail\CongratulateAdmin;
 use App\Mail\CongratulateUser;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -24,6 +26,6 @@ class SendWelcomeEmail
      */
     public function handle(UserCreated $event): void
     {
-        Mail::to($event->getUser()->email)->send(new CongratulateUser($event->getUser()->name));
+        SendWelcomeEmailJob::dispatch($event->getUser());;
     }
 }
