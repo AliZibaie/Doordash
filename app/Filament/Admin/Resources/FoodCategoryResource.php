@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources;
 use App\Filament\Admin\Resources\FoodCategoryResource\Pages;
 use App\Models\FoodCategory;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\ActionSize;
@@ -24,7 +25,12 @@ class FoodCategoryResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('type')
+                    ->label('Category')
+                    ->required()
+                    ->string()
+                    ->minLength(4)
+                    ->maxLength(255)
             ]);
     }
 
@@ -55,6 +61,8 @@ class FoodCategoryResource extends Resource
                     Tables\Actions\DeleteAction::make(),
                     Tables\Actions\RestoreAction::make(),
                     Tables\Actions\ForceDeleteAction::make(),
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
                     ])
                     ->label('Actions')
                     ->size(ActionSize::Small)
