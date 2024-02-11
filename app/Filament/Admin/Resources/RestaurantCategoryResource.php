@@ -4,9 +4,12 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\RestaurantCategoryResource\Pages;
 use App\Models\RestaurantCategory;
+use Filament\Actions\CreateAction;
+use Filament\Actions\ReplicateAction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\ActionSize;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
@@ -29,7 +32,6 @@ class RestaurantCategoryResource extends Resource
     {
         return $form
             ->schema([
-                //
             ]);
     }
 
@@ -40,28 +42,39 @@ class RestaurantCategoryResource extends Resource
                TextColumn::make('type')
                    ->label('Categories')
                    ->searchable()
-                   ->sortable(),
+                   ->sortable()
+                   ->toggleable(),
                 TextColumn::make('registered_at')
                 ->label('Date')
                     ->dateTime('Y M j h:i')
                     ->searchable()
                     ->sortable()
+                    ->toggleable()
             ])
             ->filters([
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ViewAction::make(),
+//                    Tables\Actions\ForceDeleteAction::make(),
+                ])
+                    ->label('Actions')
+                    ->size(ActionSize::Small)
+                    ->button()
+                    ->color('success'),
+//                                ExportAction::make()->button(),
+//                Tables\Actions\CreateAction::make()->button(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                     ExportBulkAction::make()
                         ->exports([
-                            ExcelExport::make('csv')->fromTable()->withWriterType(Excel::CSV),
-                            ExcelExport::make('excel')->fromTable(),
-
+                            ExcelExport::make('csv')->fromTable()->withWriterType(Excel::CSV)->askForFilename(),
+                            ExcelExport::make('excel')->fromTable()->askForFilename(),
                         ])
                 ]),
             ]);

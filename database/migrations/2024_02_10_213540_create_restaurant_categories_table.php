@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('type')->unique();
             $table->dateTime('registered_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
