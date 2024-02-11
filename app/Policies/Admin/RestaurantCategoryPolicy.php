@@ -23,7 +23,7 @@ class RestaurantCategoryPolicy
     public function view(User $user, RestaurantCategory $restaurantCategory): Response
     {
         return $user->can('restaurant categories.show') ? Response::allow() :
-            Response::deny('you dont have permission to visit restaurant categories!');
+            Response::deny('you dont have permission to visit a restaurant category!');
     }
 
     /**
@@ -32,7 +32,7 @@ class RestaurantCategoryPolicy
     public function create(User $user): Response
     {
         return $user->can('restaurant categories.create') ? Response::allow() :
-            Response::deny('you dont have permission to visit restaurant categories!');
+            Response::deny('you dont have permission to create a restaurant category!');
     }
 
     /**
@@ -41,7 +41,7 @@ class RestaurantCategoryPolicy
     public function update(User $user, RestaurantCategory $restaurantCategory): Response
     {
                return $user->can('restaurant categories.update') ? Response::allow() :
-            Response::deny('you dont have permission to visit restaurant categories!');
+            Response::deny('you dont have permission to update restaurant category!');
     }
 
     /**
@@ -50,7 +50,7 @@ class RestaurantCategoryPolicy
     public function delete(User $user, RestaurantCategory $restaurantCategory): Response
     {
                return $user->can('restaurant categories.delete') ? Response::allow() :
-            Response::deny('you dont have permission to visit restaurant categories!');
+            Response::deny('you dont have permission to delete restaurant category!');
     }
 
     /**
@@ -59,7 +59,7 @@ class RestaurantCategoryPolicy
     public function restore(User $user, RestaurantCategory $restaurantCategory): Response
     {
                 return $user->can('restaurant categories.restore') ? Response::allow() :
-            Response::deny('you dont have permission to visit restaurant categories!');
+            Response::deny('you dont have permission to restore restaurant category!');
     }
 
     /**
@@ -68,6 +68,6 @@ class RestaurantCategoryPolicy
     public function forceDelete(User $user, RestaurantCategory $restaurantCategory): Response
     {
         return $user->can('restaurant categories.forceDelete') ? Response::allow() :
-            Response::deny('you dont have permission to visit restaurant categories!');
+            Response::deny('you dont have permission to forceDelete restaurant category!');
     }
 }
