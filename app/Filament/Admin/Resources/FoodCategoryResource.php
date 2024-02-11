@@ -77,6 +77,11 @@ class FoodCategoryResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->exports([
+                            ExcelExport::make('csv')->fromTable()->withWriterType(Excel::CSV)->askForFilename(),
+                            ExcelExport::make('excel')->fromTable()->askForFilename(),
+                        ])
                 ]),
             ]);
     }
