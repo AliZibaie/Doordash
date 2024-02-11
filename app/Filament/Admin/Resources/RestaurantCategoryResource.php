@@ -39,6 +39,7 @@ class RestaurantCategoryResource extends Resource
                     ->required()
                     ->string()
                     ->minLength(4)
+                    ->maxLength(255)
             ]);
     }
 
