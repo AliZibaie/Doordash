@@ -40,6 +40,7 @@ class RestaurantCategoryResource extends Resource
                     ->string()
                     ->minLength(4)
                     ->maxLength(255)
+                    ->unique(),
             ]);
     }
 

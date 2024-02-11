@@ -6,6 +6,7 @@ use App\Filament\Admin\Resources\FoodCategoryResource\Pages;
 use App\Models\FoodCategory;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\ActionSize;
@@ -14,6 +15,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Maatwebsite\Excel\Excel;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class FoodCategoryResource extends Resource
 {
@@ -31,6 +35,7 @@ class FoodCategoryResource extends Resource
                     ->string()
                     ->minLength(4)
                     ->maxLength(255)
+                    ->unique(),
             ]);
     }
 
