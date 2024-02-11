@@ -54,6 +54,7 @@ class FoodCategoryResource extends Resource
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\DeleteAction::make(),
                     Tables\Actions\RestoreAction::make(),
+                    Tables\Actions\ForceDeleteAction::make(),
                     ])
                     ->label('Actions')
                     ->size(ActionSize::Small)
