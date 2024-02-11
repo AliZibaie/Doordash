@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\RestaurantCategory;
+use App\Models\FoodCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class RestaurantCategorySeeder extends Seeder
+class FoodCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        RestaurantCategory::factory()->count(100)->create();
+        FoodCategory::factory()->count(100)->create();
     }
 }

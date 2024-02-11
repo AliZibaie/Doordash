@@ -1,5 +1,5 @@
 
-# Snappfood
+# Doordash
 
 This project is a clone of snappfood.ir
 with the features below
@@ -7,8 +7,8 @@ with the features below
 ### Admin
 <ol>
 <li>banner (create+index+delete+edit+set(as active))</li>
-<li>restaurant categories (create+index+delete+edit)</li>
-<li>food categories (create+index+delete+edit)</li>
+<li>restaurant categories (create+index+delete+edit+forceDelete+restore)</li>
+<li>food categories (create+index+delete+edit+forceDelete+restore)</li>
 <li>discount (create+index+delete+edit)</li>
 <li>see restaurants list and get report as excel & pdf</li>
 <li>see comments and accept or reject to be published</li>
