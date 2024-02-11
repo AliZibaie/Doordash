@@ -1,8 +1,7 @@
 
 # Doordash
 
-This project is a clone of snappfood.ir
-with the features below
+This project is a clone of doordash.com with additional features .
 
 ### Admin
 <ol>
