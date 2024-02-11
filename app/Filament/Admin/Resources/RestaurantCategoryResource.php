@@ -64,6 +64,8 @@ class RestaurantCategoryResource extends Resource
                     Tables\Actions\DeleteAction::make(),
                     Tables\Actions\ForceDeleteAction::make(),
                     Tables\Actions\ViewAction::make(),
+                    Tables\Actions\RestoreAction::make(),
+
                 ])
                     ->label('Actions')
                     ->size(ActionSize::Small)
