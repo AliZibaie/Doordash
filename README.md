@@ -14,6 +14,7 @@ with the features below
 <li>see comments and accept or reject to be published</li>
 <li>posts (create+index+delete+edit+publish)</li>
 <li>accept sellers request to become a seller</li>
+<li>see users list and can make a user an admin</li>
 </ol>
 
 ### Seller

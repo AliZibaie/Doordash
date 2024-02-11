@@ -16,6 +16,7 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use League\CommonMark\Extension\Table\TableSection;
 use Maatwebsite\Excel\Excel;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
@@ -39,7 +40,10 @@ class RestaurantCategoryResource extends Resource
     {
         return $table
             ->columns([
-               TextColumn::make('type')
+                TextColumn::make('id')
+                    ->toggleable(isToggledHiddenByDefault:true)
+                    ->sortable(),
+                TextColumn::make('type')
                    ->label('Categories')
                    ->searchable()
                    ->sortable()
@@ -52,20 +56,24 @@ class RestaurantCategoryResource extends Resource
                     ->toggleable()
             ])
             ->filters([
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ForceDeleteAction::make(),
                     Tables\Actions\ViewAction::make(),
-//                    Tables\Actions\ForceDeleteAction::make(),
                 ])
                     ->label('Actions')
                     ->size(ActionSize::Small)
                     ->button()
                     ->color('success'),
-//                                ExportAction::make()->button(),
-//                Tables\Actions\CreateAction::make()->button(),
+//                Forms\Components\Section::make('test')->columns([
+
+//                    Tables\Actions\CreateAction::make()->button(),
+//                ])
+
 
             ])
             ->bulkActions([
