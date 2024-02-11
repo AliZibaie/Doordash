@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('restaurant_categories', function (Blueprint $table) {
             $table->id();
             $table->string('type')->unique();
-            $table->dateTime('registered_at')->nullable();
+            $table->dateTime('registered_at')->nullable()->default(Carbon::now());
             $table->timestamps();
             $table->softDeletes();
         });

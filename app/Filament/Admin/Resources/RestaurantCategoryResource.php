@@ -7,6 +7,7 @@ use App\Models\RestaurantCategory;
 use Filament\Actions\CreateAction;
 use Filament\Actions\ReplicateAction;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\ActionSize;
@@ -33,6 +34,11 @@ class RestaurantCategoryResource extends Resource
     {
         return $form
             ->schema([
+                TextInput::make('type')
+                    ->label('Category')
+                    ->required()
+                    ->string()
+                    ->minLength(4)
             ]);
     }
 
@@ -65,18 +71,11 @@ class RestaurantCategoryResource extends Resource
                     Tables\Actions\ForceDeleteAction::make(),
                     Tables\Actions\ViewAction::make(),
                     Tables\Actions\RestoreAction::make(),
-
                 ])
                     ->label('Actions')
                     ->size(ActionSize::Small)
                     ->button()
                     ->color('success'),
-//                Forms\Components\Section::make('test')->columns([
-
-//                    Tables\Actions\CreateAction::make()->button(),
-//                ])
-
-
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
