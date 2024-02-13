@@ -28,30 +28,25 @@ class BannerResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('alt'),
-                TextInput::make('title'),
-                TextInput::make('text'),
+                TextInput::make('title')->required()->minLength(3),
+                TextInput::make('text')->required()->minLength(5),
                 Fieldset::make('image')
                     ->relationship('image')
                     ->schema([
                         FileUpload::make('url')
-                            ->directory('banners'),
-                    ])
-//                FileUpload::make('url')
-//                    ->label('image'),
-//                Grid::make()
-//                    ->relationship('image')
-//                    ->schema([
-//                        FileUpload::make('url')
-//                            ->directory('banners')
-//                            ->image(),
-//                    ]),
+                            ->directory('banners')
+                            ->image()
+                            ->imageEditor()
+                            ->required()
+                            ->minSize(2)
+                            ->maxSize(1000),
+                    ]),
+                TextInput::make('alt')->label('An alternative text for image'),
             ]);
     }
 
     public static function table(Table $table): Table
     {
-//        dd(Tables\Columns\ImageColumn::make('image.url')->url('app/public/banners/01HPHEV46Y15A17FB886K19QKR.webp'));
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('alt'),
@@ -59,7 +54,7 @@ class BannerResource extends Resource
                 Tables\Columns\TextColumn::make('text'),
                 Tables\Columns\ImageColumn::make('image.url')
                     ->label('Image')
-//                    ->width(100)
+                    ->width(1000)
 //                    ->height(100)
 //                    ->url(Storage::url())
             ])
