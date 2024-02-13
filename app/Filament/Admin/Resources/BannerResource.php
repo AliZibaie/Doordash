@@ -69,13 +69,29 @@ class BannerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('alt'),
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('text'),
+                Tables\Columns\TextColumn::make('id')
+                    ->toggleable()
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('alt')
+                    ->words(1)
+                    ->label('Alternative')
+                    ->toggleable(isToggledHiddenByDefault:true)
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('title')
+                    ->words(2)
+                    ->toggleable(isToggledHiddenByDefault:true)
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('text')
+                    ->wrap()
+                    ->toggleable(isToggledHiddenByDefault:true)
+                    ->searchable(),
                 Tables\Columns\ImageColumn::make('image.url')
                     ->width(400)
                     ->height(100)
                     ->label('Image')
+                    ->toggleable(isToggledHiddenByDefault:true)
 //                    ->height(100)
 //                    ->url(Storage::url())
             ])
