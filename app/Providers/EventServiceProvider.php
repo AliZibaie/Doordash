@@ -30,7 +30,7 @@ class EventServiceProvider extends ServiceProvider
 
         UserDeleted::class => [
             \App\Listeners\UserDeleted\NotifyAdmin::class,
-//            \App\Listeners\UserDeleted\NotifyAdmin::class,
+            \App\Listeners\UserDeleted\WishUserLuck::class,
         ]
     ];
     /**
