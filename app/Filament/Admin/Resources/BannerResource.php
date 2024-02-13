@@ -94,7 +94,9 @@ class BannerResource extends Resource
                     ->height(100)
                     ->label('Image')
                     ->toggleable(),
-                Tables\Columns\ToggleColumn::make('is_current')
+                Tables\Columns\ToggleColumn::make('is_current')->beforeStateUpdated(function ($record, $state) {
+                    Banner::query()->update(['is_current'=>false]);
+                })
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
