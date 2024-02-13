@@ -6,6 +6,7 @@ use App\Filament\Admin\Resources\BannerResource\Pages;
 use App\Models\Banner;
 use App\Models\Image;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
@@ -15,6 +16,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Storage;
 
 class BannerResource extends Resource
 {
@@ -29,20 +31,37 @@ class BannerResource extends Resource
                 TextInput::make('alt'),
                 TextInput::make('title'),
                 TextInput::make('text'),
-                Grid::make()
+                Fieldset::make('image')
                     ->relationship('image')
                     ->schema([
                         FileUpload::make('url')
-                            ->image(),
-                    ]),
+                            ->directory('banners'),
+                    ])
+//                FileUpload::make('url')
+//                    ->label('image'),
+//                Grid::make()
+//                    ->relationship('image')
+//                    ->schema([
+//                        FileUpload::make('url')
+//                            ->directory('banners')
+//                            ->image(),
+//                    ]),
             ]);
     }
 
     public static function table(Table $table): Table
     {
+//        dd(Tables\Columns\ImageColumn::make('image.url')->url('app/public/banners/01HPHEV46Y15A17FB886K19QKR.webp'));
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('alt'),
+                Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('text'),
+                Tables\Columns\ImageColumn::make('image.url')
+                    ->label('Image')
+//                    ->width(100)
+//                    ->height(100)
+//                    ->url(Storage::url())
             ])
             ->filters([
                 //
@@ -60,6 +79,7 @@ class BannerResource extends Resource
     public static function getRelations(): array
     {
         return [
+//            ImageRelationManager::class,
         ];
     }
 
