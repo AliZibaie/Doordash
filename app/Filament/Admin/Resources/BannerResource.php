@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\BannerResource\Pages;
+use App\Filament\Admin\Resources\BannerResource\RelationManagers\ImageRelationManager;
 use App\Models\Banner;
 use App\Models\Image;
 use Filament\Forms;
@@ -14,6 +15,7 @@ use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\ActionSize;
 use Filament\Support\Enums\IconPosition;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -70,37 +72,44 @@ class BannerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault:true)
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('alt')
                     ->words(1)
                     ->label('Alternative')
-                    ->toggleable(isToggledHiddenByDefault:true)
+                    ->toggleable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('title')
                     ->words(2)
-                    ->toggleable(isToggledHiddenByDefault:true)
+                    ->toggleable()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('text')
                     ->wrap()
-                    ->toggleable(isToggledHiddenByDefault:true)
+                    ->toggleable()
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image.url')
                     ->width(400)
                     ->height(100)
                     ->label('Image')
-                    ->toggleable(isToggledHiddenByDefault:true)
+                    ->toggleable()
 //                    ->height(100)
 //                    ->url(Storage::url())
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ForceDeleteAction::make(),
+                ])
+                    ->label('Actions')
+                    ->size(ActionSize::Small)
+                    ->button()
+                    ->color('success'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -112,7 +121,7 @@ class BannerResource extends Resource
     public static function getRelations(): array
     {
         return [
-//            ImageRelationManager::class,
+            ImageRelationManager::class,
         ];
     }
 
@@ -124,4 +133,5 @@ class BannerResource extends Resource
             'edit' => Pages\EditBanner::route('/{record}/edit'),
         ];
     }
+
 }
