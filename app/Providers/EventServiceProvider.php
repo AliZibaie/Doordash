@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Events\NewSignUpUser;
 use App\Events\UserCreated;
 use App\Events\UserDeleted;
 use App\Jobs\UserCreated\NotifyAdminJob;
