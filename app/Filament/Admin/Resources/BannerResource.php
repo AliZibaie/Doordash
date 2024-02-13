@@ -6,12 +6,15 @@ use App\Filament\Admin\Resources\BannerResource\Pages;
 use App\Models\Banner;
 use App\Models\Image;
 use Filament\Forms;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\IconPosition;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -28,20 +31,37 @@ class BannerResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('title')->required()->minLength(3),
-                TextInput::make('text')->required()->minLength(5),
-                Fieldset::make('image')
-                    ->relationship('image')
-                    ->schema([
-                        FileUpload::make('url')
-                            ->directory('banners')
-                            ->image()
-                            ->imageEditor()
+                Forms\Components\Tabs::make('tabs')->tabs([
+                    Forms\Components\Tabs\Tab::make('Advertisement texts')->schema([
+                        TextInput::make('title')
                             ->required()
-                            ->minSize(2)
-                            ->maxSize(1000),
+                            ->minLength(3),
+                        MarkdownEditor::make('text')
+                            ->required()
+                            ->minLength(5),
+                        ])
+                        ->icon('heroicon-m-presentation-chart-line')
+                        ->iconPosition(IconPosition::Before),
+                        Forms\Components\Tabs\Tab::make('Image')->schema([
+                            Fieldset::make('Upload image here')
+                                ->relationship('image')
+                                ->schema([
+                                    FileUpload::make('url')
+                                        ->label('Image')
+                                        ->directory('banners')
+                                        ->image()
+                                        ->imageEditor()
+                                        ->required()
+                                        ->minSize(2)
+                                        ->maxSize(1000),
+                                ])->columns(1),
+                            TextInput::make('alt')->label('An alternative text for image')
+                                ->required()
+                                ->minLength(3)
+                                ->maxLength(255),
+                        ])->icon('heroicon-m-photo')
+                            ->iconPosition(IconPosition::Before),
                     ]),
-                TextInput::make('alt')->label('An alternative text for image'),
             ]);
     }
 
@@ -53,8 +73,9 @@ class BannerResource extends Resource
                 Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('text'),
                 Tables\Columns\ImageColumn::make('image.url')
+                    ->width(400)
+                    ->height(100)
                     ->label('Image')
-                    ->width(1000)
 //                    ->height(100)
 //                    ->url(Storage::url())
             ])
