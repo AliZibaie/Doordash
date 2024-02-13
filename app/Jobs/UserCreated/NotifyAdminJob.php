@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\UserCreated;
 
-use App\Mail\CongratulateUser;
+use App\Mail\UserCreated\CongratulateAdmin;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class SendWelcomeEmailJob implements ShouldQueue
+class NotifyAdminJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -28,6 +28,6 @@ class SendWelcomeEmailJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->user->email)->send(new CongratulateUser($this->user->name));
+        Mail::to('alizibaie1380@gmail.com')->send(new CongratulateAdmin($this->user->email));
     }
 }

@@ -1,24 +1,22 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\UserDeleted;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class CongratulateUser extends Mailable
+class TellAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public string $name)
+    public function __construct(public string $email)
     {
-        //
     }
 
     /**
@@ -27,7 +25,7 @@ class CongratulateUser extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Congratulate User',
+            subject: 'Tell Admin',
         );
     }
 
@@ -37,8 +35,8 @@ class CongratulateUser extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.user.congratulation',
-            with: [$this->name],
+            view: 'mails.admin.deletedUser',
+            with: [$this->email],
         );
     }
 

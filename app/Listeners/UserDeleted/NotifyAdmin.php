@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\UserDeleted;
 
-use App\Events\UserCreated;
-use App\Jobs\NotifyAdminJob;
-use App\Mail\CongratulateAdmin;
+use App\Events\UserDeleted;
+use App\Jobs\UserDeleted\NotifyAdminJob;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\Mail;
 
 class NotifyAdmin
 {
@@ -22,7 +20,7 @@ class NotifyAdmin
     /**
      * Handle the event.
      */
-    public function handle(UserCreated $event): void
+    public function handle(UserDeleted $event): void
     {
         NotifyAdminJob::dispatch($event->getUser());
     }

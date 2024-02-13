@@ -93,9 +93,8 @@ class BannerResource extends Resource
                     ->width(400)
                     ->height(100)
                     ->label('Image')
-                    ->toggleable()
-//                    ->height(100)
-//                    ->url(Storage::url())
+                    ->toggleable(),
+                Tables\Columns\ToggleColumn::make('is_current')
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

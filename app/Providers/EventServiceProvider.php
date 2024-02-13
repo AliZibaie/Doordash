@@ -4,12 +4,13 @@ namespace App\Providers;
 
 use App\Events\NewSignUpUser;
 use App\Events\UserCreated;
-use App\Listeners\NotifyAdmin;
-use App\Listeners\SendWelcomeEmail;
+use App\Events\UserDeleted;
+use App\Jobs\UserCreated\NotifyAdminJob;
+use App\Listeners\UserCreated\NotifyAdmin;
+use App\Listeners\UserCreated\SendWelcomeEmail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,11 @@ class EventServiceProvider extends ServiceProvider
         UserCreated::class => [
             NotifyAdmin::class,
             SendWelcomeEmail::class,
+        ],
+
+        UserDeleted::class => [
+            \App\Listeners\UserDeleted\NotifyAdmin::class,
+//            \App\Listeners\UserDeleted\NotifyAdmin::class,
         ]
     ];
     /**
