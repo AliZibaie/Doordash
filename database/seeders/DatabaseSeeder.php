@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             RestaurantCategorySeeder::class,
             FoodCategorySeeder::class,
+            BannerSeeder::class,
         ]);
     }
 }
