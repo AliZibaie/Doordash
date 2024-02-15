@@ -99,6 +99,7 @@ class DiscountResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
                     ExportBulkAction::make()
                         ->exports([
                             ExcelExport::make('csv')->fromTable()->withWriterType(Excel::CSV)->askForFilename(),
