@@ -7,6 +7,8 @@ use App\Enums\DiscountType;
 use App\Filament\Admin\Resources\DiscountResource\Pages;
 use App\Models\Banner;
 use App\Models\Discount;
+use App\Rules\LessThanHundredIfPercent;
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
@@ -34,14 +36,32 @@ class DiscountResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Textarea::make('description'),
-                TextInput::make('amount')->numeric(),
-                DateTimePicker::make('expire_at'),
-                DateTimePicker::make('start_at'),
+                Forms\Components\Textarea::make('description')
+                    ->required()
+                    ->string()
+                    ->minLength(5)
+                    ->maxLength(255),
+                TextInput::make('amount')
+                    ->numeric()
+                    ->required(),
+                DateTimePicker::make('expire_at')
+                    ->required()
+                    ->date()
+                    ->after(Carbon::now()),
+                DateTimePicker::make('start_at')
+                    ->required()
+                    ->date()
+                    ->after(Carbon::now()),
                 Select::make('type')
-                    ->options(DiscountType::class),
+                    ->required()
+                    ->options(DiscountType::class)
+                    ->enum(DiscountType::class)
+                    ->rules([new LessThanHundredIfPercent()]),
                 Select::make('status')
-                    ->options(DiscountStatus::class),
+                    ->required()
+                    ->options(DiscountStatus::class)
+                    ->enum(DiscountStatus::class),
+
             ]);
     }
 
