@@ -20,6 +20,9 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Maatwebsite\Excel\Excel;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class DiscountResource extends Resource
 {
@@ -96,6 +99,11 @@ class DiscountResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->exports([
+                            ExcelExport::make('csv')->fromTable()->withWriterType(Excel::CSV)->askForFilename(),
+                            ExcelExport::make('excel')->fromTable()->askForFilename(),
+                        ])
                 ]),
             ]);
     }
