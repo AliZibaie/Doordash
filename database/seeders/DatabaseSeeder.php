@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\RestaurantCategory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +17,7 @@ class DatabaseSeeder extends Seeder
             RestaurantCategorySeeder::class,
             FoodCategorySeeder::class,
             BannerSeeder::class,
+            DiscountSeeder::class,
         ]);
     }
 }
