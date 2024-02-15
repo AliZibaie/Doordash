@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\UserDeleted;
+use App\Events\UserUpdated;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class ProfileController extends Controller
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
-
+        UserUpdated::dispatch(Auth::user());
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');

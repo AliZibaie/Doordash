@@ -11,7 +11,6 @@ This project is a clone of doordash.com with additional features .
 <li>discount (create+index+delete+edit)</li>
 <li>see restaurants list and get report as excel & pdf</li>
 <li>see comments and accept or reject to be published</li>
-<li>posts (create+index+delete+edit+publish)</li>
 <li>accept sellers request to become a seller</li>
 <li>see users list and can make a user an admin</li>
 </ol>

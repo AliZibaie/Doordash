@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\UserCreated;
 use App\Events\UserDeleted;
+use App\Events\UserUpdated;
 use App\Jobs\UserCreated\NotifyAdminJob;
 use App\Listeners\UserCreated\NotifyAdmin;
 use App\Listeners\UserCreated\SendWelcomeEmail;
@@ -30,6 +31,9 @@ class EventServiceProvider extends ServiceProvider
         UserDeleted::class => [
             \App\Listeners\UserDeleted\NotifyAdmin::class,
             \App\Listeners\UserDeleted\WishUserLuck::class,
+        ],
+        UserUpdated::class=>[
+            \App\Listeners\UserUpdated\NotifyAdmin::class,
         ]
     ];
     /**
