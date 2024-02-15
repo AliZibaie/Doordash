@@ -8,6 +8,9 @@ use App\Filament\Admin\Resources\DiscountResource\Pages;
 use App\Models\Banner;
 use App\Models\Discount;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,7 +31,14 @@ class DiscountResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Textarea::make('description'),
+                TextInput::make('amount')->numeric(),
+                DateTimePicker::make('expire_at'),
+                DateTimePicker::make('start_at'),
+                Select::make('type')
+                    ->options(DiscountType::class),
+                Select::make('status')
+                    ->options(DiscountStatus::class),
             ]);
     }
 
@@ -58,14 +68,12 @@ class DiscountResource extends Resource
                 ToggleColumn::make('is_food_party')
                     ->toggleable()
                     ->searchable()
-                    ->sortable()
                     ->beforeStateUpdated(function ($record, $state) {
                         Discount::query()->update(['is_food_party'=>false]);
                     }),
                 TextColumn::make('amount')
                     ->toggleable()
-                    ->searchable()
-                    ->sortable(),
+                    ->searchable(),
                 SelectColumn::make('status')
                     ->options(DiscountStatus::class)
                     ->selectablePlaceholder(false),
